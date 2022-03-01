@@ -1,4 +1,3 @@
-
 #Importation des librairies
 
 import numpy as np
@@ -160,12 +159,10 @@ def makeprediction(tweet_vector,model):
     return prediction
 
 
-
-################################################################
+###############################################################""
+import tkinter as tk
+import random
 from pathlib import Path
-
-# from tkinter import *
-# Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage,Label
 def changetext(string):
     canvas.create_text(
@@ -179,12 +176,16 @@ def changetext(string):
 
 def getEntry():
     res = entry_1.get()
+    entry_t.configure(state='normal')
+    entry_t.delete('1.0', tk.END)
     tweet = cleantweet(res)
     l2=vectorizetweet(tweet,vocab)
     if makeprediction(l2,my_model)==0:
-        changetext("Faux")
+        entry_t.insert(tk.END,"Faux")
     else:
-        changetext("Vrai")
+        entry_t.insert(tk.END,"Vrai")
+
+    entry_t.configure(state='disabled')
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path("./assets")
@@ -198,9 +199,6 @@ window = Tk()
 
 window.geometry("1267x691")
 window.configure(bg = "#FFFFFF")
-window.title("Fake news detector")
-window.iconbitmap('assets/twitter.ico')
-
 canvas = Canvas(
     window,
     bg = "#FFFFFF",
@@ -287,7 +285,18 @@ canvas.create_text(
     fill="#4B4B4B",
     font=("Inter Bold", 36 * -1)
 )
-
+entry_t = Text(
+    state='disabled',
+    bd=0,
+    highlightthickness=0,
+   
+)
+entry_t.place(
+    x=296.0,
+    y=395.0,
+   width=355,
+    height=120
+)
 canvas.create_text(
     286.0,
     354.0,
