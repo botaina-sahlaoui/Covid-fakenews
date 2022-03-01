@@ -305,6 +305,6 @@ canvas.create_text(
     fill="#4B4B4B",
     font=("Inter Bold", 36 * -1)
 )
-window.resizable(False, False)
+window.resizable(True, True)
 
 window.mainloop()
